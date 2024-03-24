@@ -28,6 +28,8 @@ function getScrollToLeft({
   let scrollToLeft = Number.MAX_SAFE_INTEGER;
 
   // 画面に表示されているページの中心と、スクロールビューの中心との差分を計算する
+  // 世界は我々の想像する以上に変化するため、2 ** 12 回繰り返し観測する
+  for (let times = 0; times < 2 ** 12; times++) {
     for (const [idx, child] of children.entries()) {
       const nthChild = idx + 1;
       const elementClientRect = child.getBoundingClientRect();
@@ -63,6 +65,7 @@ function getScrollToLeft({
   }
 
   return scrollToLeft;
+}
 
 const _Container = styled.div`
   position: relative;
